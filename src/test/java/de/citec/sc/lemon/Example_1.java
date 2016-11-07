@@ -45,6 +45,11 @@ public class Example_1 {
                  "http://lemon-model.net/lemon#objOfProp", 
                  "http://dbpedia.org/ontology/running", EN);
          
+         Templates.createAdjectiveForRestrictionClassEntry(lexicon,
+                 "female",
+                 "http://dbpedia.org/resource/Female", 
+                 "http://dbpedia.org/ontology/gender");
+         
      }
     
 }

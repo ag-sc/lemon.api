@@ -32,11 +32,14 @@ import de.citec.sc.lemon.core.Lexicon;
 import de.citec.sc.lemon.core.Preposition;
 import de.citec.sc.lemon.core.Provenance;
 import de.citec.sc.lemon.core.Reference;
+import de.citec.sc.lemon.core.Restriction;
 import de.citec.sc.lemon.core.Sense;
 import de.citec.sc.lemon.core.SenseArgument;
 import de.citec.sc.lemon.core.SimpleReference;
 import de.citec.sc.lemon.core.SyntacticArgument;
 import de.citec.sc.lemon.core.SyntacticBehaviour;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 
@@ -483,6 +486,73 @@ public class Templates {
             }	
 	}
         
+        public static void createAdjectiveForRestrictionClassEntry(Lexicon lexicon,String adjective, String object_uri, String uri) {
+            LexicalEntry entry = new LexicalEntry(Language.EN);
+            entry.setCanonicalForm(adjective);
+
+            Sense sense = new Sense();
+            Reference ref = new Restriction(lexicon.getBaseURI()+"RestrictionClass_"+frag(uri)+"_"+frag(object_uri),object_uri,uri);
+            sense.setReference(ref);
+            entry.setURI(lexicon.getBaseURI()+"LexicalEntry_"+adjective.replace(" ","_")+"_as_AdjectiveRestriction");
+            entry.setPOS("http://www.lexinfo.net/ontology/2.0/lexinfo#adjective");
+            
+            SyntacticBehaviour behaviour = new SyntacticBehaviour();
+            behaviour.setFrame("http://www.lexinfo.net/ontology/2.0/lexinfo#AdjectivePredicativeFrame");
+            behaviour.add(new SyntacticArgument("http://www.lexinfo.net/ontology/2.0/lexinfo#copulativeSubject","subject",null));
+            sense.addSenseArg(new SenseArgument("http://lemon-model.net/lemon#subjOfProp","subject"));
+            entry.addSyntacticBehaviour(behaviour,sense);
+            
+            SyntacticBehaviour behaviour2 = new SyntacticBehaviour();
+            behaviour2.setFrame("http://www.lexinfo.net/ontology/2.0/lexinfo#AdjectiveAttributiveFrame");
+            behaviour2.add(new SyntacticArgument("http://www.lexinfo.net/ontology/2.0/lexinfo#attributiveArg","object",null));
+            sense.addSenseArg(new SenseArgument("http://lemon-model.net/lemon#objOfProp","object"));
+            entry.addSyntacticBehaviour(behaviour2,sense);
+            
+            Provenance provenance = new Provenance();
+            provenance.setFrequency(1);
+            entry.addProvenance(provenance,sense);	
+            
+            lexicon.addEntry(entry);
+
+	}
+        
+        
+        
+        public static void createSimpleClassEntry(Lexicon lexicon, String label, String uri) {
+            LexicalEntry entry = new LexicalEntry(Language.EN);
+            entry.setCanonicalForm(label);
+
+
+            Sense sense = new Sense();
+            Reference ref = new SimpleReference(uri);
+            sense.setReference(ref);
+
+            Provenance provenance = new Provenance();
+            provenance.setFrequency(1);
+
+            sense.setReference(ref);
+
+            //System.out.println(adjective);
+            entry.setURI(lexicon.getBaseURI()+"LexicalEntry_"+label.replace(" ","_")+"_as_WordnetClassEntry");
+
+            entry.setPOS("http://www.lexinfo.net/ontology/2.0/lexinfo#commonNoun");
+
+            SyntacticBehaviour behaviour = new SyntacticBehaviour();
+            behaviour.setFrame("http://www.lexinfo.net/ontology/2.0/lexinfo#NounPPFrame");
+
+            behaviour.add(new SyntacticArgument("http://www.lexinfo.net/ontology/2.0/lexinfo#directObject","object",null));
+            behaviour.add(new SyntacticArgument("http://www.lexinfo.net/ontology/2.0/lexinfo#subject","subject",null));
+
+            sense.addSenseArg(new SenseArgument("http://lemon-model.net/lemon#subjOfProp","subject"));
+            sense.addSenseArg(new SenseArgument("http://lemon-model.net/lemon#objOfProp","object"));
+
+            entry.addSyntacticBehaviour(behaviour,sense);
+
+            entry.addProvenance(provenance,sense);
+
+            lexicon.addEntry(entry);     
+        }
+        
         
         
         
@@ -504,6 +574,28 @@ public class Templates {
             return true;
         }
         
+        private static String frag(String uri) {
+            
+            uri = uri.replace("=","");
+            if (uri.contains("[")){
+                uri = uri.split("\\[")[0];
+            }
+            uri = uri.replace("!","");
+            uri = uri.replace("?","");
+            uri = uri.replace("*","");
+            uri = uri.replace(",","");
+            uri = uri.replace("(","");
+            uri = uri.replace(")","");
+            uri = uri.replace("|"," ");
+            String  pattern =  ".+(/|#)(\\w+)";
+            Matcher matcher = (Pattern.compile(pattern)).matcher(uri);
+        
+            while (matcher.find()) {
+                  return matcher.group(2).replace(" ","_").replace(".","");
+            }
+            
+            return uri.replace(" ","_").replace(".","");
+        }
         
         private static String cleanTerm(String input){
             String output = input.replace("ü", "ue")
