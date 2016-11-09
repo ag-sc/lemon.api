@@ -27,6 +27,7 @@
 package de.citec.sc.lemon;
 
 import static de.citec.sc.lemon.core.Language.EN;
+import de.citec.sc.lemon.core.LexicalEntry;
 import de.citec.sc.lemon.core.Lexicon;
 import de.citec.sc.lemon.utils.Templates;
 
@@ -49,6 +50,22 @@ public class Example_1 {
                  "female",
                  "http://dbpedia.org/resource/Female", 
                  "http://dbpedia.org/ontology/gender");
+         
+         Templates.create_TransitiveVerb_Entry(lexicon,
+                 "run",
+                 "http://lemon-model.net/lemon#subjOfProp",
+                 "http://lemon-model.net/lemon#objOfProp",
+                 "http://dbpedia.org/ontology/running", EN);
+        
+         Templates.create_TransitiveVerb_Entry(lexicon,
+                 "run2",
+                 "http://lemon-model.net/lemon#objOfProp",
+                 "http://lemon-model.net/lemon#subjOfProp",
+                 "http://dbpedia.org/ontology/running", EN);
+         
+         for(LexicalEntry entry:lexicon.getEntries()){
+             System.out.println(entry.getCanonicalForm());
+         }
          
      }
     

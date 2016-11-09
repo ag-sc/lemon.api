@@ -84,9 +84,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(noun)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
 
 
 
@@ -104,10 +103,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(noun)){
-                        lexicon.addEntry(entry);
+                    lexicon.addEntry(entry);
 
-                    }
             }
 	        			 
 	}
@@ -149,9 +146,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(noun)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
 
 
 
@@ -169,9 +165,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(noun)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
 
             }
 	}
@@ -211,9 +206,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(adjective)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
 
 
 
@@ -231,9 +225,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(adjective)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
             }
 	}
 	
@@ -277,9 +270,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
 
             }	
 
@@ -295,9 +286,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
             }
 	}
 	
@@ -337,9 +326,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
             }	
 
             else if (e1_arg.equals("http://lemon-model.net/lemon#objOfProp") && e2_arg.equals("http://lemon-model.net/lemon#subjOfProp"))
@@ -354,9 +342,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
             }	
 	}
                 
@@ -395,14 +381,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-
-                        //logger.debug("Found entry:"+entry+"\n");
-                    }
-                    else{
-                        //logger.debug("Dit not add entry, beause of label: "+verb);
-                    }
+                    lexicon.addEntry(entry);
 
 
             }	
@@ -419,9 +398,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
             }	
 	}
                         
@@ -463,9 +440,8 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
+                    
             }	
 
             else if (e1_arg.equals("http://lemon-model.net/lemon#objOfProp") && e2_arg.equals("http://lemon-model.net/lemon#subjOfProp"))
@@ -480,9 +456,7 @@ public class Templates {
                     entry.addSyntacticBehaviour(behaviour,sense);
                     entry.addProvenance(provenance,sense);
 
-                    if(isAlpha(verb)){
-                        lexicon.addEntry(entry);
-                    }
+                    lexicon.addEntry(entry);
             }	
 	}
         
@@ -556,23 +530,7 @@ public class Templates {
         
         
         
-        
-        
-        
-        
-        private static boolean isAlpha(String label) {
-            if(label.length()<=2) return false;
-            label = cleanTerm(label);
-            label = label.replace("_","");
-            char[] chars = label.toCharArray();
-
-            for (char c : chars) {
-                if(!Character.isLetter(c)) {
-                    return false;
-                }
-            }
-            return true;
-        }
+  
         
         private static String frag(String uri) {
             
