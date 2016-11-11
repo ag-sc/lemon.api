@@ -25,18 +25,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <build>
-        <plugins>
-            <plugin>
+      <plugins>
+        <plugin>
             <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-jar-plugin</artifactId>
-              <version>2.4</version>
+              <version>2.5</version>
               <configuration>
-                <archive>
-                  <manifest>
-                    <addClasspath>true</addClasspath>
-                    <mainClass>de.citec.sc.matoll.process.Matoll</mainClass>
-                  </manifest>
-                </archive>
               </configuration>
             </plugin>
 
@@ -49,8 +43,12 @@
                  </configuration>
                 <version>3.3</version>
             </plugin>
-
-        </plugins>  
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+      </plugins>
     </build>
     <name>lemon.api</name>
 </project>
