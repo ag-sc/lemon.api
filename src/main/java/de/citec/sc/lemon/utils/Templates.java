@@ -48,7 +48,11 @@ import java.util.regex.Pattern;
 public class Templates {
 	
    
-	public static void create_NounPossessive_Entry(Lexicon lexicon,String noun, String e1_arg, String e2_arg, String reference, Language language) {
+        public static void create_NounPossessive_Entry(Lexicon lexicon,String noun, String e1_arg, String e2_arg, String reference, Language language) {
+            create_NounPossessive_Entry(lexicon, noun, e1_arg, e2_arg, reference, language, 1);
+        }
+                    
+	public static void create_NounPossessive_Entry(Lexicon lexicon,String noun, String e1_arg, String e2_arg, String reference, Language language, int frequency) {
 	        		 
             LexicalEntry entry = new LexicalEntry(language);
 
@@ -57,7 +61,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();
@@ -109,9 +113,12 @@ public class Templates {
 	        			 
 	}
 	
+        public static void create_NounWithPrep_Entry(Lexicon lexicon, String noun, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+            create_NounWithPrep_Entry(lexicon, noun, e1_arg, e2_arg, preposition, reference,language,1);
+        }
+
 	
-	
-	public static void create_NounWithPrep_Entry(Lexicon lexicon, String noun, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+	public static void create_NounWithPrep_Entry(Lexicon lexicon, String noun, String e1_arg, String e2_arg, String preposition, String reference, Language language, int frequency) {
 	        		 
             LexicalEntry entry = new LexicalEntry(language);
             Sense sense = new Sense();
@@ -121,7 +128,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();
@@ -172,7 +179,11 @@ public class Templates {
 	}
 	
 	
-	public static void create_Adjective_Entry(Lexicon lexicon, String adjective, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+        public static void create_Adjective_Entry(Lexicon lexicon, String adjective, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+            create_Adjective_Entry(lexicon, adjective, e1_arg,e2_arg,preposition,reference, language,1);
+        }
+
+	public static void create_Adjective_Entry(Lexicon lexicon, String adjective, String e1_arg, String e2_arg, String preposition, String reference, Language language, int frequency) {
 	        		 
             LexicalEntry entry = new LexicalEntry(language);
             entry.setURI(lexicon.getBaseURI()+"LexicalEntry_"+cleanTerm(adjective)+"_as_Adjective_withPrep_"+preposition);
@@ -183,7 +194,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();
 
@@ -232,8 +243,12 @@ public class Templates {
 	
 	
 	
+        public static void create_TransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String reference, Language language) {
+            create_TransitiveVerb_Entry(lexicon, verb, e1_arg, e2_arg, reference, language,1);
+        }
+
 	
-	public static void create_TransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String reference, Language language) {
+	public static void create_TransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String reference, Language language, int frequency) {
             LexicalEntry entry = new LexicalEntry(language);
 
             
@@ -244,7 +259,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();
@@ -291,6 +306,11 @@ public class Templates {
 	}
 	
         public static void create_ReflexiveTransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+            create_ReflexiveTransitiveVerb_Entry(lexicon, verb, e1_arg, e2_arg, preposition, reference, language,1);
+
+        }
+
+        public static void create_ReflexiveTransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String preposition, String reference, Language language, int frequency) {
 
             LexicalEntry entry = new LexicalEntry(language);
             entry.setPreposition(new Preposition(language,preposition));
@@ -300,7 +320,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();
@@ -401,8 +421,13 @@ public class Templates {
                     lexicon.addEntry(entry);
             }	
 	}
-                        
-	public static void create_IntransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+        
+        public static void create_IntransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String preposition, String reference, Language language) {
+            create_IntransitiveVerb_Entry(lexicon, verb, e1_arg, e2_arg,  preposition, reference, language,1);
+
+        }
+
+	public static void create_IntransitiveVerb_Entry(Lexicon lexicon, String verb, String e1_arg, String e2_arg, String preposition, String reference, Language language, int frequency) {
 
             LexicalEntry entry = new LexicalEntry(language);
             entry.setPreposition(new Preposition(language,preposition));
@@ -412,7 +437,7 @@ public class Templates {
             sense.setReference(ref);
 
             Provenance provenance = new Provenance();
-            provenance.setFrequency(1);
+            provenance.setFrequency(frequency);
 
 
             SyntacticBehaviour behaviour = new SyntacticBehaviour();

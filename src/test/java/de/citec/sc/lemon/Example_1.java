@@ -29,6 +29,7 @@ package de.citec.sc.lemon;
 import static de.citec.sc.lemon.core.Language.EN;
 import de.citec.sc.lemon.core.LexicalEntry;
 import de.citec.sc.lemon.core.Lexicon;
+import de.citec.sc.lemon.io.CSV_LexiconLoader;
 import de.citec.sc.lemon.utils.Templates;
 
 /**
@@ -66,6 +67,9 @@ public class Example_1 {
          for(LexicalEntry entry:lexicon.getEntries()){
              System.out.println(entry.getCanonicalForm());
          }
+         
+         CSV_LexiconLoader loader = new CSV_LexiconLoader();
+         loader.loadFromFile("resources/matoll_test.tsv", EN);
          
      }
     

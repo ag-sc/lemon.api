@@ -69,9 +69,6 @@ public class Lexicon {
 		this.baseURI = baseURI;
 	}
 
-    public Lexicon(Language language) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 	
         public void addLexicon(Lexicon lex){
             lex.getEntries().stream().forEach((e) -> {
