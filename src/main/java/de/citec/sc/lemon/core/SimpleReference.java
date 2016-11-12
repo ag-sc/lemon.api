@@ -67,6 +67,7 @@ public class SimpleReference implements Reference {
 		return true;
 	}
 
+        @Override
         public String getURI() {
                return reference;
         }

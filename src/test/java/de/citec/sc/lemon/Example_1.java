@@ -30,7 +30,11 @@ import static de.citec.sc.lemon.core.Language.EN;
 import de.citec.sc.lemon.core.LexicalEntry;
 import de.citec.sc.lemon.core.Lexicon;
 import de.citec.sc.lemon.io.CSV_LexiconLoader;
+import de.citec.sc.lemon.io.CSV_LexiconSerialization;
 import de.citec.sc.lemon.utils.Templates;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -68,8 +72,15 @@ public class Example_1 {
              System.out.println(entry.getCanonicalForm());
          }
          
-         CSV_LexiconLoader loader = new CSV_LexiconLoader();
-         loader.loadFromFile("resources/matoll_test.tsv", EN);
+         CSV_LexiconSerialization serializer = new CSV_LexiconSerialization();
+         try {
+             serializer.serialize(lexicon, "example_1.csv");
+         } catch (IOException ex) {
+             Logger.getLogger(Example_1.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+        //         CSV_LexiconLoader loader = new CSV_LexiconLoader();
+        //         loader.loadFromFile("resources/matoll_test.tsv", EN);
          
      }
     
