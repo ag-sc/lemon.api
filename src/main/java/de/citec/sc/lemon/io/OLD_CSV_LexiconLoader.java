@@ -40,10 +40,10 @@ import java.util.stream.Stream;
  * 
  * @author swalter
  */
-public class CSV_LexiconLoader {
+public class OLD_CSV_LexiconLoader {
     
         
-        public  CSV_LexiconLoader()
+        public  OLD_CSV_LexiconLoader()
         {		
 	}
 	
