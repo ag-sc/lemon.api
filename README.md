@@ -166,7 +166,7 @@ the Boolean argument enables or disables the function to automatically remove th
 
 ## General
 
-This API was developed by [Sebastian Walter](https://github.com/swalter2) in his Thesis [*Generation of Multilingual Ontology Lexica with M-ATOLL*](http://nbn-resolving.de/urn:nbn:de:0070-pub-29077066). The discription above was also extracted from this thesis.
+This API was developed by [Sebastian Walter](https://github.com/swalter2) in his Thesis [*Generation of Multilingual Ontology Lexica with M-ATOLL*](http://nbn-resolving.de/urn:nbn:de:0070-pub-29077066). The description above was also extracted from this thesis.
 
 ## License
 
