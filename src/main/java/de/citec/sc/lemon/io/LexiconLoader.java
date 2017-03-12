@@ -364,7 +364,6 @@ public class LexiconLoader {
     }
     
     private static Set<String> getAlternativeForms(Resource subject, Model model) {
-		
         Resource otherForm;
         Set<String> forms = new HashSet<>();
 
@@ -372,28 +371,28 @@ public class LexiconLoader {
 
         Literal form;
 
+        Iterator<Statement> iterator = subject.listProperties(LEMON.otherForm);
+        while(iterator.hasNext()){
+        	stmt = iterator.next();
+            if (stmt != null)
+            {
+                    otherForm = (Resource) stmt.getObject();
 
-        stmt = subject.getProperty(LEMON.canonicalForm);
+                    if (otherForm != null)
+                    {
+                            stmt = otherForm.getProperty(LEMON.writtenRep);
 
-        if (stmt != null)
-        {
-                otherForm = (Resource) stmt.getObject();
-
-                if (otherForm != null)
-                {
-                        stmt = otherForm.getProperty(LEMON.otherForm);
-
-                        if (stmt != null)
-                        {
-                        form = (Literal) otherForm.getProperty(LEMON.otherForm).getObject();
-                                if (form.toString().contains("@")){
-                                    forms.add(form.toString().split("@")[0]);
-                                }
-                                else forms.add(form.toString());
-                        }
-                }
+                            if (stmt != null)
+                            {
+                            form = (Literal) otherForm.getProperty(LEMON.writtenRep).getObject();
+                                    if (form.toString().contains("@")){
+                                        forms.add(form.toString().split("@")[0]);
+                                    }
+                                    else forms.add(form.toString());
+                            }
+                    }
+            }
         }
-
         return forms;
     }
     
