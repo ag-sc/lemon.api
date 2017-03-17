@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * 
  * @author Alessandro Di Diego
+ * @author Giuseppe Vertulli
  */
 public class LexiconWithResources extends Lexicon {
 

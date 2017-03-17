@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.Resource;
 /**
  * 
  * @author Alessandro Di Diego
+ * @author Giuseppe Vertulli
  */
 public class LexicalEntryWithResources extends LexicalEntry {
 
