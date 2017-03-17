@@ -44,9 +44,7 @@ import org.apache.jena.vocabulary.RDF;
 
 import de.citec.sc.lemon.core.Language;
 
-import de.citec.sc.lemon.core.LexicalEntry;
 import de.citec.sc.lemon.core.LexicalEntryWithResources;
-import de.citec.sc.lemon.core.Lexicon;
 import de.citec.sc.lemon.core.LexiconWithResources;
 import de.citec.sc.lemon.core.Preposition;
 import de.citec.sc.lemon.core.Provenance;

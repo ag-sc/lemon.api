@@ -47,7 +47,7 @@ public class LEXINFO {
 	public static Property verb = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#verb");
 	public static Property commonNoun = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#commonNoun");
 	public static Property adjective = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#adjective");
-        public static Property preposition = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#preposition");
+    public static Property preposition = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#preposition");
         
 	
 	public static Property transitiveFrame = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#TransitiveFrame");
