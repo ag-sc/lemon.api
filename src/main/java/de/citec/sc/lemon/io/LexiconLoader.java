@@ -45,7 +45,9 @@ import org.apache.jena.vocabulary.RDF;
 import de.citec.sc.lemon.core.Language;
 
 import de.citec.sc.lemon.core.LexicalEntry;
+import de.citec.sc.lemon.core.LexicalEntryWithResources;
 import de.citec.sc.lemon.core.Lexicon;
+import de.citec.sc.lemon.core.LexiconWithResources;
 import de.citec.sc.lemon.core.Preposition;
 import de.citec.sc.lemon.core.Provenance;
 import de.citec.sc.lemon.core.Restriction;
@@ -76,7 +78,7 @@ public class LexiconLoader {
 		
 	}
 	
-	public Lexicon loadFromFile(String file)
+	public LexiconWithResources loadFromFile(String file)
 	{
 		
 		Model model = RDFDataMgr.loadModel(file);
@@ -84,7 +86,7 @@ public class LexiconLoader {
 		 Statement stmt;
 		 Resource loaded_entry;
 		 
-		 Lexicon lexicon = new Lexicon();
+		 LexiconWithResources lexicon = new LexiconWithResources();
 		 
 		 StmtIterator iter = model.listStatements(null, LEMON.canonicalForm, (RDFNode) null);
 
@@ -103,7 +105,7 @@ public class LexiconLoader {
                          /*
                          Language
                          */
-                         LexicalEntry entry = new LexicalEntry(language);
+                         LexicalEntryWithResources entry = new LexicalEntryWithResources(language);
                          
                          entry.setURI(loaded_entry.toString());
                          
@@ -121,6 +123,7 @@ public class LexiconLoader {
                          Canonnical Form
                          */
                          entry.setCanonicalForm(getCanonicalForm(loaded_entry,model));
+                         entry.setCanonicalFormResource(getCanonicalFormResource(loaded_entry,model));
                          
                          /*
                           *Alternative Form 
@@ -131,6 +134,17 @@ public class LexiconLoader {
                              if(!otherForms.isEmpty()){
                                  for(String a : otherForms){
                                      entry.addAlternativeForms(a);
+                                 }
+                                 
+                             }
+                         }
+                         catch(Exception e) {e.printStackTrace();};
+                         
+                         try{
+                             Set<Resource> otherFormsResources = getAlternativeFormsResources(loaded_entry,model);
+                             if(!otherFormsResources.isEmpty()){
+                                 for(Resource a : otherFormsResources){
+                                     entry.addAlternativeFormsResource(a);
                                  }
                                  
                              }
@@ -327,50 +341,70 @@ public class LexiconLoader {
 
         Literal form;
 
+        canonicalForm = getCanonicalFormResource(subject, model);
 
-        stmt = subject.getProperty(LEMON.canonicalForm);
+        if (canonicalForm != null)
+        {
+                stmt = canonicalForm.getProperty(LEMON.writtenRep);
 
+                if (stmt != null)
+                {
+                form = (Literal) canonicalForm.getProperty(LEMON.writtenRep).getObject();
+                        if (form.toString().contains("@")){
+                            return form.toString().split("@")[0];
+                            }
+                            else return form.toString();
+                    }
+                    else
+                    {
+                            return null;
+                    }
+
+            }
+            else
+            {
+                    return null;
+            }
+  
+    }
+    private static Resource getCanonicalFormResource(Resource subject, Model model) {
+        Resource canonicalForm = null;
+        Statement stmt = subject.getProperty(LEMON.canonicalForm);
         if (stmt != null)
         {
                 canonicalForm = (Resource) stmt.getObject();
-
-                if (canonicalForm != null)
-                {
-                        stmt = canonicalForm.getProperty(LEMON.writtenRep);
-
-                        if (stmt != null)
-                        {
-                        form = (Literal) canonicalForm.getProperty(LEMON.writtenRep).getObject();
-                                if (form.toString().contains("@")){
-                                    return form.toString().split("@")[0];
-                                }
-                                else return form.toString();
-                        }
-                        else
-                        {
-                                return null;
-                        }
-
-                }
-                else
-                {
-                        return null;
-                }
         }
-        else
-        {
-                // //System.out.print("Entry "+loaded_entry+" has no canonical form!!!\n");
-                return null;
-        }		
+        return canonicalForm;
     }
     
     private static Set<String> getAlternativeForms(Resource subject, Model model) {
-        Resource otherForm;
         Set<String> forms = new HashSet<>();
 
         Statement stmt;
 
         Literal form;
+
+        for(Resource otherForm : getAlternativeFormsResources(subject,model)){
+                stmt = otherForm.getProperty(LEMON.writtenRep);
+
+                if (stmt != null)
+                {
+                form = (Literal) otherForm.getProperty(LEMON.writtenRep).getObject();
+                        if (form.toString().contains("@")){
+                            forms.add(form.toString().split("@")[0]);
+                        }
+                        else forms.add(form.toString());
+                }
+        }
+               
+        return forms;
+    }
+    
+    private static Set<Resource> getAlternativeFormsResources(Resource subject, Model model) {
+        Resource otherForm;
+        Set<Resource> forms = new HashSet<>();
+
+        Statement stmt;
 
         Iterator<Statement> iterator = subject.listProperties(LEMON.otherForm);
         while(iterator.hasNext()){
@@ -381,16 +415,7 @@ public class LexiconLoader {
 
                     if (otherForm != null)
                     {
-                            stmt = otherForm.getProperty(LEMON.writtenRep);
-
-                            if (stmt != null)
-                            {
-                            form = (Literal) otherForm.getProperty(LEMON.writtenRep).getObject();
-                                    if (form.toString().contains("@")){
-                                        forms.add(form.toString().split("@")[0]);
-                                    }
-                                    else forms.add(form.toString());
-                            }
+                        forms.add(otherForm);
                     }
             }
         }
