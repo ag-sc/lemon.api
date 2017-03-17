@@ -47,7 +47,7 @@ public class LEXINFO {
 	public static Property verb = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#verb");
 	public static Property commonNoun = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#commonNoun");
 	public static Property adjective = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#adjective");
-        public static Property preposition = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#preposition");
+    public static Property preposition = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#preposition");
         
 	
 	public static Property transitiveFrame = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#TransitiveFrame");
@@ -55,6 +55,8 @@ public class LEXINFO {
 	public static Property nounPossessiveFrame = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#NounPossessiveFrame");
 	public static Property nounPredicateFrame = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#NounPredicateFrame");
 	
-
+	public static Property number = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#number");
+	public static Property tense = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#tense");
+	public static Property degree = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#degree");
 	
 }
